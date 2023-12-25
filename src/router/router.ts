@@ -14,6 +14,16 @@ const _routes = [
                 name: 'home-overview',
                 component: () => import('../components/home/Overview.vue'),
             },
+            {
+                path: 'purchase',
+                name: 'home-purchase',
+                component: () => import('../components/upload/purchase.vue'),
+            },
+            {
+                path: 'goods',
+                name: 'home-upload',
+                component: () => import('../components/upload/Upload.vue'),
+            },
         ],
     },
     {

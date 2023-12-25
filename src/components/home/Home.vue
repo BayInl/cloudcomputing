@@ -38,10 +38,10 @@ const store = useStore()
 }
 
 .el-main {
-    background: red;
+    /*background: red;*/
 }
 
 .el-footer {
-    background: yellow;
+    /*background: yellow;*/
 }
 </style>

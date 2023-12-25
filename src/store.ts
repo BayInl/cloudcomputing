@@ -7,6 +7,9 @@ export default createStore({
             isLogged: false,
         }
     },
+    getters: {
+        currentUser: state => state.currentUser,
+    },
     mutations: {
         setUser(state, user: number) {
             state.currentUser = user
@@ -18,6 +21,6 @@ export default createStore({
             state.isLogged = false,
                 state.currentUser = -1
             name: ''
-        }
+        },
     }
 })

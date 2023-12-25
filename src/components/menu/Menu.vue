@@ -19,7 +19,17 @@ const MenuList = ref([
     {
         index: '2',
         title: '上传数据',
-        icon: 'Upload'
+        icon: 'Upload',
+        children: [
+            {
+                index: '2-1',
+                title: '购买商品'
+            },
+            {
+                index: '2-2',
+                title: '添加商品'
+            }
+        ]
     },
     {
         index: '3',
@@ -40,6 +50,12 @@ const handleSelect = (index, indexPath) => {
     switch (index) {
         case '1-1':
             router.push({ name: 'home-overview' });
+            break;
+        case '2-1':
+            router.push({ name: 'home-purchase' });
+            break;
+        case '2-2':
+            router.push({ name: 'home-upload' });
             break;
         // 添加更多的case以处理其他的路由跳转
         default:
