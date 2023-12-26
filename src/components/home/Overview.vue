@@ -15,9 +15,11 @@ import VChart from 'vue-echarts';
 use([BarChart, PieChart, CanvasRenderer]);
 //@ts-ignore
 const option = ref({
+    color: ['#c23531', '#2f4554', '#61a0a8'],
     title: {
         text: 'Traffic Sources',
         left: 'center',
+        top: '100px'
     },
     tooltip: {
         trigger: 'item',
@@ -41,6 +43,9 @@ const option = ref({
                 { value: 135, name: 'Video Ads' },
                 { value: 1548, name: 'Search Engines' },
             ],
+            itemStyle: {
+                color: '#0a1107'  // 设置柱状图的颜色，这里为蓝色
+            },
             emphasis: {
                 itemStyle: {
                     shadowBlur: 10,
@@ -48,7 +53,11 @@ const option = ref({
                     shadowColor: 'rgba(0, 0, 0, 0.5)',
                 },
             },
+            // itemStyle: {
+            //     color: '#070711'  // 设置柱状图的颜色，这里为蓝色
+            // }
         },
+
     ],
 });
 //@ts-ignore
@@ -135,10 +144,6 @@ const getgoodsByCategory = async (category: Category): Promise<Good[]> => {
                 return r.data.data
             }
             else {
-                ElMessage({
-                    message: '获取商品信息失败: ' + r.data.msg + ' 请重试',
-                    type: 'error'
-                })
                 return []
             }
         })
@@ -188,18 +193,17 @@ const countGoodsByMainCategory = async () => {
     percategorygoods.value = {
         title: {
             text: '商品分类数量统计',
-            left: 'center'
-
         },
         grid: {
             left: '3%',
-            right: '4%',
-            bottom: '-5%',
+            right: '1%',
+            bottom: '0%',
             containLabel: true
         },
         tooltip: {
             trigger: 'item',
             formatter: '{a} <br/>{b} : {c} ({d}%)',
+
         },
         legend: {
             data: Array.from(goodsByMainCategory.keys())
@@ -249,8 +253,9 @@ const countGoodsByDetailCategory = async () => {
         goodsCountByDetailCategoryArray.push(count)
     }
     perdetailgoods.value = {
+        color: ['rgba(8,171,199,0.9)'],
         title: {
-            text: '商品分类数量统计'
+            text: '商品分类统计'
         },
         grid: {
             left: '3%',
@@ -260,7 +265,7 @@ const countGoodsByDetailCategory = async () => {
         },
         tooltip: {
             trigger: 'item',
-            formatter: '{a} <br/>{b} : {c} ({d}%)',
+            formatter: '{a} <br/>{b} : {c}',
         },
         legend: {
             data: ['商品数量']
@@ -309,6 +314,7 @@ const getSalesByMainCategory = async () => {
     }
     console.log(goodsSalesByMainCategory)
     percategorysales.value = {
+        color: ['#61a0a8'],
         title: {
             text: '商品销量统计'
         },
@@ -363,8 +369,9 @@ const getSalesByDetailCategory = async () => {
         }
     }
     perdetailsales.value = {
+        color: ['#446238'],
         title: {
-            text: '商品销量统计'
+            text: '商品销量统计',
         },
         grid: {
             left: '3%',
@@ -400,12 +407,14 @@ onMounted(() => {
 
 <template>
     <div class="home">
-        <h2>数据分析平台</h2>
-        <el-row :gutter="20" style="100vh">
-            <el-col :span="6"><v-chart class="chart" :option="percategorygoods" autoresize /></el-col>
-            <el-col :span="6"><v-chart class="chart" :option="perdetailgoods" autoresize /></el-col>
-            <el-col :span="6"><v-chart class="chart" :option="percategorysales" autoresize /></el-col>
-            <el-col :span="6"><v-chart class="chart" :option="perdetailsales" autoresize /></el-col>
+<!--        <h2>数据分析平台</h2>-->
+        <el-row :gutter="20" style=" margin-top: 50px;">
+            <el-col :span="12" class="custom-height"><v-chart class="chart" :option="percategorygoods" autoresize /></el-col>
+            <el-col :span="12" class="custom-height"><v-chart class="chart" :option="perdetailgoods" autoresize /></el-col>
+            <el-col :span="12" class="custom-height"><v-chart class="chart" :option="percategorysales" autoresize /></el-col>
+            <el-col :span="12" class="custom-height">
+                <v-chart class="chart" :option="perdetailsales" autoresize />
+            </el-col>
         </el-row>
         
         
@@ -417,8 +426,8 @@ onMounted(() => {
 
 <style scoped>
 .chart {
-    height: 30vh;
-    width: 20vw;
+    height: 35vh;
+    width: 30vw;
 }
 
 .el-col {
@@ -431,5 +440,9 @@ onMounted(() => {
 
 .el-row:last-child {
     margin-bottom: 0;
+}
+
+.custom-height {
+    height: 300px;
 }
 </style>

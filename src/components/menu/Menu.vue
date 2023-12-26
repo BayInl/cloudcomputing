@@ -31,17 +31,17 @@ const MenuList = ref([
             }
         ]
     },
-    {
-        index: '3',
-        title: '分析',
-        icon: 'DataAnalysis',
-        children: [
-            {
-                index: '3-1',
-                title: '项目一'
-            }
-        ]
-    }
+    // {
+    //     index: '3',
+    //     title: '分析',
+    //     icon: 'DataAnalysis',
+    //     children: [
+    //         {
+    //             index: '3-1',
+    //             title: '项目一'
+    //         }
+    //     ]
+    // }
 ])
 //@ts-ignore
 const handleSelect = (index, indexPath) => {
